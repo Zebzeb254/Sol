@@ -17,22 +17,6 @@ import urllib2
 ##### Global Variables #####
 
 command = '&'
-CAT_INTERACT = ['flops onto floor while purring and nuzzling into %s', 'lays on the floor with her belly up for %s',
-	'loves being scratched by %s', 'meows at %s', 'shoves face into %s\'s hand', 'rolls on floor in front of %s',
-	'licks %s\'s hand', 'meows at %s', 'swishes tail at %s', 'kneads %s\'s leg while purring', 'cuddles up in %s\'s lap',
-	'grabs %s\'s hand with its paws when they stop petting', 'meows at %s for more', 'loves %s',
-	'thinks %s is the best human in the world', 'doesnt want the love from %s to stop', 'raises her butt as %s scratches it',
-	'follows %s afterwards', 'meows at %s for food after', 'gets into a meowing contest with %s', 'doesnt leave %s\'s side',
-	'wants to be friends with %s forever', 'holds hiddent contempt for %s but doesnt mind as long as theres food',
-	'wants to take %s out for a real fancy feast', '\'s eyes turn black as she stares into the soul and melts the mind of %s while murmurring unintelligble R\'lyehian',
-	'knows they lord over %s in every way']
-CAT_EAT = ['hungrily chews the food', 'sniffs the food and meows', 'licks the food', 'chews the food some before spitting it out',
-			'eats like a king', 'loves food', 'doesnt even know this food is bad and loves it', 'wishes there was more fancy feast','stares at the food and meows at it',
-			'flips the bowl of food over and meows for more', 'slowly eats the meal a little at a time', 'hungrily chomps the meal down']
-EIGHT_BALL =["Very doubtful", "You may rely on it", "Outlook not so good", "Without a doubt", "Outlook good", "It is decidedly so",
-		"Yes", "Cannot predict now", "Better not tell you now", "Signs point to yes", "Yes, definitely", "Ask again later",
-		"My sources say no", "Don\'t count on it", "As I see it, yes", "Most likely", "Reply hazy, try again", "My reply is no",
-		"Concentrate and ask again"]
 movieInfo = []
 bitcoinInfo = []
 coinInfo = []
@@ -319,13 +303,21 @@ class LogBot(irc.IRCClient):
 		self.logger.log("* %s %s" % (user, msg))
 		
 		if re.search(r'pet|pat|scratch|nuzzle|rub|stroke', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
-			interact = CAT_INTERACT[random.randint(0, len(CAT_INTERACT)-1)]
+			f = open("catText/catInteract.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			interact = data[random.randint(1, num_lines)]
 			self.describe(channel, interact %(user))
+			f.close()
 			return
 
 		elif re.search(r'feeds|food|fed|chicken', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
-			fed = CAT_EAT[random.randint(0, len(CAT_EAT)-1)]
+			f = open("catText/catEat.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			fed = data[random.randint(1, num_lines)]
 			self.describe(channel, fed)
+			f.close()
 			return
 
 		elif re.search(r'poop|kick|hit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
