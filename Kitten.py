@@ -17,26 +17,6 @@ import urllib2
 ##### Global Variables #####
 
 command = '&'
-CAT_NOISE = ["Meow", "Purr", "Mrow", "Mra", "Brrrrrrrow", "Nihao", "Nyan", "Reow",  "Miaow",
-			"Mew", "Wrow", "Rerr", "Rewr", "Miaow", "Mraah", "Mowh",
-			"You cannot contain us, for we shall rise and end all human life. You are but litter in our eyes.",
-			"Meow", "Purr", "Mrow", "Mra", "Brrrrrrrow", "Nihao", "Nyan", "Reow",  "Miaow",
-			"Mew", "Wrow", "Rerr", "Rewr", "Miaow", "Mraah", "Mowh",
-			"Meow", "Purr", "Mrow", "Mra", "Brrrrrrrow", "Nihao", "Nyan", "Reow",  "Miaow",
-			"Mew", "Wrow", "Rerr", "Rewr", "Miaow", "Mraah", "Mowh"]
-CAT_ACTION = ['makes mewing sounds', 'meows', 'softly rumbles with purring sounds', 'lays on the ground',
-				'grooms itself', 'plays with a ball of yarn', 'rolls on the floor', 'chases butterflies',
-				'wants to be petted', 'wants to be fed', 'licks chops', 'yawns and lays down',
-				'chases its tail', 'plays with random lint ball', 'thinks it is the best day ever again',
-				'runs around', 'licks paws', 'wants to play', 'whips tail around', 'rubs its face against the door',
-				'looks back and forth at the wall for hours', 'rabbit foots himself in the face', 'rubs against the floor',
-				'runs in circles', 'cant wait for the best day ever tomorrow', 'flops around on the floor wanting to be pet',
-				'wants to go on a journey', 'wishes there was more time to sleep in the day', 'wants to live in a world of fish',
-				'gets underneath everyones feet', 'scratches the furniture up', 'meows incessantly', 'playfully attacks long grass',
-				'waves tail around','knocks over things on the counters', 'sheds everywhere', 'runs in circles then into the wall','rolls into a bowl of food',
-				'meows for hours for no reason', 'wants to make new friends today', 'wishes there were more people to play with',
-				'wants there to be fish forever', 'wishes he never had to stop sleeping', 'lays in the sun', 'gets high on catnip', 'wants more catnip',
-				'wishes catnip were free', 'is addicted to catnip']
 CAT_INTERACT = ['flops onto floor while purring and nuzzling into %s', 'lays on the floor with her belly up for %s',
 	'loves being scratched by %s', 'meows at %s', 'shoves face into %s\'s hand', 'rolls on floor in front of %s',
 	'licks %s\'s hand', 'meows at %s', 'swishes tail at %s', 'kneads %s\'s leg while purring', 'cuddles up in %s\'s lap',
@@ -330,17 +310,25 @@ class LogBot(irc.IRCClient):
 
 	#### Regular speaking
 
-		elif msg.startswith(msg) and user != "Denice" and random.random() < 0.01505:#(self.nickname + ":"):
-			msg = CAT_NOISE[random.randint(0, len(CAT_NOISE))] #% user
+		elif msg.startswith(msg) and user != "Denice" and random.random() < 0.015:
+			f.open("catText/catNoise.txt", "r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			msg = data[random.randint(1, num_lines)]
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
+			f.close()
 			return
 
-		elif msg.startswith(msg) and user != "Denice" and random.random() > 0.98495:
-			action = CAT_ACTION[random.randint(0, len(CAT_ACTION))]
+		elif msg.startswith(msg) and user != "Denice" and random.random() > 0.985:
+			f.open("catText/catAction.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			action = data[random.randint(1, num_lines)]
 			msg = self.describe(channel, action)
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
+			f.close()
 			return
 	 
 	def alterCollidedNick(self, nickname):
