@@ -1,5 +1,5 @@
 # Most of the code comes from  Twisted Matrix Laboratories. Their imports and what not.
-#All the kitten actions belong to me I'm pretty sure. I could be wrong.
+# All the kitten actions belong to me I'm pretty sure. I could be wrong.
 # To run the script: $ python ircLogBot.py <file>
 
 # twisted imports
@@ -38,38 +38,6 @@ bitcoinInfo = []
 coinInfo = []
 
 ##### Applications #####
-
-def Weather(areaCode):
-	global sections
-	cookieJar = cookielib.CookieJar()
-	opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookieJar))
-
-	url = "http://autocomplete.wunderground.com/aq?query=" + areaCode
-	request = urllib2.Request(url)
-	page = opener.open(request)
-
-	# This is one big string
-	rawdata = page.read()
-		
-	zmw = re.search('"zmw": "(.+?)"', rawdata)
-	if zmw:
-		zmwAddress = zmw.group(1)
-		cookieJar = cookielib.CookieJar()
-		opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookieJar))
-
-		url = "http://www.wunderground.com/q/zmw:" + zmwAddress
-		request = urllib2.Request(url)
-		page = opener.open(request)
-		rawdata = page.read()
-		# This breaks it up into lines
-		lines_of_data = rawdata.split('\n')
-		#'<meta name="og:title" content="City, state | 55&deg; | Clear" />
-		special_lines = [line for line in lines_of_data if line.find('og:title')>-1]
-		# Now we clean up - very crude
-		info = special_lines[0].replace('"','').replace('/>','').replace('&deg;','F').split('content=')[1]
-		sections = info.split('|')
-	if not zmw:
-		sections = "Oh no! That place doesn't exist!"
 
 def Movie(movieName):
 	cookieJar = cookielib.CookieJar()
@@ -237,13 +205,20 @@ class LogBot(irc.IRCClient):
 			return
 
 		elif msg.startswith(command + "forcemeow"):
-			msg = CAT_NOISE[random.randint(0, len(CAT_NOISE))]
+			f = open("catText/catNoise.txt", "r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			msg = data[random.randint(1, num_lines)]
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
+			f.close()
 			return
 
 		elif msg.startswith(command + "forceplay"):
-			action = CAT_ACTION[random.randint(0, len(CAT_ACTION))]
+			f = open("catText/catAction.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			action = data[random.randint(1, num_lines)]
 			msg = self.describe(channel, action)
 			self.msg(channel, msg)
 			self.logger.log("%s %s %s" % (channel, self.nickname, msg))
@@ -297,9 +272,13 @@ class LogBot(irc.IRCClient):
 			return
 		
 		elif msg.startswith(command + "8ball"):
-			msg = EIGHT_BALL[random.randint(0, len(EIGHT_BALL) - 1)]
+			f = open("catText/eightBall.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			msg = data[random.randint(1, num_lines)]
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
+			f.close()
 			return
 
 
@@ -311,7 +290,7 @@ class LogBot(irc.IRCClient):
 	#### Regular speaking
 
 		elif msg.startswith(msg) and user != "Denice" and random.random() < 0.015:
-			f.open("catText/catNoise.txt", "r")
+			f = open("catText/catNoise.txt", "r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
 			msg = data[random.randint(1, num_lines)]
@@ -321,7 +300,7 @@ class LogBot(irc.IRCClient):
 			return
 
 		elif msg.startswith(msg) and user != "Denice" and random.random() > 0.985:
-			f.open("catText/catAction.txt","r")
+			f = open("catText/catAction.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
 			action = data[random.randint(1, num_lines)]
