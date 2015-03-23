@@ -1,0 +1,26 @@
+'flops onto floor while purring and nuzzling into %s'
+'lays on the floor with her belly up for %s',
+'loves being scratched by %s'
+'meows at %s'
+'shoves face into %s\'s hand'
+'rolls on floor in front of %s',
+'licks %s\'s hand'
+'meows at %s'
+'swishes tail at %s'
+'kneads %s\'s leg while purring'
+'cuddles up in %s\'s lap',
+'grabs %s\'s hand with its paws when they stop petting'
+'meows at %s for more'
+'loves %s',
+'thinks %s is the best human in the world'
+'doesnt want the love from %s to stop'
+'raises her butt as %s scratches it',
+'follows %s afterwards'
+'meows at %s for food after'
+'gets into a meowing contest with %s'
+'doesnt leave %s\'s side',
+'wants to be friends with %s forever'
+'holds hiddent contempt for %s but doesnt mind as long as theres food',
+'wants to take %s out for a real fancy feast'
+'\'s eyes turn black as she stares into the soul and melts the mind of %s while murmurring unintelligble R\'lyehian',
+'knows they lord over %s in every way'

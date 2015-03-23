@@ -1,0 +1,19 @@
+"Very doubtful"
+"You may rely on it"
+"Outlook not so good"
+"Without a doubt"
+"Outlook good"
+"It is decidedly so",
+"Yes"
+"Cannot predict now"
+"Better not tell you now"
+"Signs point to yes"
+"Yes definitely"
+"Ask again later",
+"My sources say no"
+"Don\'t count on it"
+"As I see it, yes"
+"Most likely"
+"Reply hazy try again"
+"My reply is no",
+"Concentrate and ask again"

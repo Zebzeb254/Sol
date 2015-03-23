@@ -1,0 +1,46 @@
+'makes mewing sounds'
+'meows'
+'softly rumbles with purring sounds'
+'lays on the ground'
+'grooms itself'
+'plays with a ball of yarn'
+'rolls on the floor'
+'chases butterflies'
+'wants to be petted'
+'wants to be fed'
+'licks chops'
+'yawns and lays down',
+'chases its tail'
+'plays with random lint ball'
+'thinks it is the best day ever again',
+'runs around'
+'licks paws'
+'wants to play'
+'whips tail around'
+'rubs its face against the door',
+'looks back and forth at the wall for hours'
+'rabbit foots himself in the face'
+'rubs against the floor',
+'runs in circles'
+'cant wait for the best day ever tomorrow'
+'flops around on the floor wanting to be pet',
+'wants to go on a journey'
+'wishes there was more time to sleep in the day'
+'wants to live in a world of fish',
+'gets underneath everyones feet'
+'scratches the furniture up'
+'meows incessantly'
+'playfully attacks long grass',
+'waves tail around','knocks over things on the counters'
+'sheds everywhere'
+'runs in circles then into the wall','rolls into a bowl of food',
+'meows for hours for no reason'
+'wants to make new friends today'
+'wishes there were more people to play with',
+'wants there to be fish forever'
+'wishes he never had to stop sleeping'
+'lays in the sun'
+'gets high on catnip'
+'wants more catnip',
+'wishes catnip were free'
+'is addicted to catnip'
