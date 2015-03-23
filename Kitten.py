@@ -14,6 +14,9 @@ import re
 import time, sys, unicodedata
 import urllib2
 
+#Module imports
+from modules.weather import Weather
+
 ##### Global Variables #####
 
 command = '&'
@@ -203,8 +206,7 @@ class LogBot(irc.IRCClient):
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
 			action = data[random.randint(1, num_lines)]
-			msg = self.describe(channel, action)
-			self.msg(channel, msg)
+			self.describe(channel, action)
 			self.logger.log("%s %s %s" % (channel, self.nickname, msg))
 			return
 
@@ -288,8 +290,7 @@ class LogBot(irc.IRCClient):
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
 			action = data[random.randint(1, num_lines)]
-			msg = self.describe(channel, action)
-			self.msg(channel, msg)
+			self.describe(channel, action)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
 			f.close()
 			return
