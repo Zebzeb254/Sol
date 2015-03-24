@@ -11,11 +11,12 @@ from twisted.python import log
 import cookielib
 import random
 import re
-import time, sys, unicodedata
+import time, sys, unicodedata, os
 import urllib2
 
 #Module imports
-from modules.weather import Weather
+sys.path.append(r'/home/kitlero/Kitten/modules')
+import weather
 
 ##### Global Variables #####
 
@@ -59,41 +60,6 @@ def Movie(movieName):
 		movieInfo.insert(4, errorOut)
 
 	return movieInfo
-
-
-def Bitcoin():
-	cookieJar = cookielib.CookieJar()
-	opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookieJar))
-
-	url = "http://data.mtgox.com/api/2/BTCUSD/money/ticker"
-	request = urllib2.Request(url)
-	page = opener.open(request)
-
-	# This is one big string
-	rawdata = page.read()
-
-	last = re.search('"last":{"value":"(.+?)"', rawdata)
-	if last:
-		lastOut = last.group(1)
-		bitcoinInfo.insert(0, "Last: " + lastOut)
-	buy = re.search('"buy":{"value":"(.+?)"', rawdata)
-	if buy:
-		buyOut = buy.group(1)
-		bitcoinInfo.insert(1, "Buy: " + buyOut)
-	sell = re.search('"sell":{"value":"(.+?)"', rawdata)
-	if sell:
-		sellOut = sell.group(1)
-		bitcoinInfo.insert(2, "Sell: " + sellOut)
-	high = re.search('"high":{"value":"(.+?)"', rawdata)
-	if high:
-		highOut = high.group(1)
-		bitcoinInfo.insert(3, "High: " + highOut)
-	low = re.search('"low":{"value":"(.+?)"', rawdata)
-	if low:
-		lowOut = low.group(1)
-		bitcoinInfo.insert(4, "Low: " + lowOut)
-
-	return bitcoinInfo
 
 def CoinEx():
 	cookieJar = cookielib.CookieJar()
@@ -195,7 +161,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/catNoise.txt", "r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			msg = data[random.randint(1, num_lines)]
+			msg = data[random.randint(1, num_lines)].rstrip('\n')
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
 			f.close()
@@ -205,7 +171,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/catAction.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			action = data[random.randint(1, num_lines)]
+			action = data[random.randint(1, num_lines)].rstrip('\n')
 			self.describe(channel, action)
 			self.logger.log("%s %s %s" % (channel, self.nickname, msg))
 			return
@@ -241,14 +207,6 @@ class LogBot(irc.IRCClient):
 			self.logger.log("%s <%s> %s" % (channel, user, msg))
 			return
 
-		elif msg.startswith(command + "mtgox"):
-			Bitcoin()
-			msg = "%s" % (bitcoinInfo)
-			del bitcoinInfo[:]
-			self.msg(channel, msg)
-			self.logger.log("%s <%s> %s" % (channel, user, msg))
-			return
-
 		elif msg.startswith(command + "btce"):
 			CoinEx()
 			msg = "%s" % (coinInfo)
@@ -261,7 +219,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/eightBall.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			msg = data[random.randint(1, num_lines)]
+			msg = data[random.randint(1, num_lines)].rstrip('\n')
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
 			f.close()
@@ -279,7 +237,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/catNoise.txt", "r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			msg = data[random.randint(1, num_lines)]
+			msg = data[random.randint(1, num_lines)].rstrip('\n')
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
 			f.close()
@@ -289,7 +247,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/catAction.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			action = data[random.randint(1, num_lines)]
+			action = data[random.randint(1, num_lines)].rstrip('\n')
 			self.describe(channel, action)
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
 			f.close()
@@ -307,7 +265,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/catInteract.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			interact = data[random.randint(1, num_lines)]
+			interact = data[random.randint(1, num_lines)].rstrip('\n')
 			self.describe(channel, interact %(user))
 			f.close()
 			return
@@ -316,7 +274,7 @@ class LogBot(irc.IRCClient):
 			f = open("catText/catEat.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
-			fed = data[random.randint(1, num_lines)]
+			fed = data[random.randint(1, num_lines)].rstrip('\n')
 			self.describe(channel, fed)
 			f.close()
 			return
