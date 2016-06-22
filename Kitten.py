@@ -279,10 +279,18 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'poop|kick|hit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		elif re.search(r'poop|kick|hit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|yiff|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			self.describe(channel, 'yowls and scratches %s' % (user))
 			return
-	 
+	 	
+	 	elif re.search(r'furaffinity|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
+	 		f = open("catText/catYiffed.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			interact = data[random.randint(1, num_lines)].rstrip('\n')
+			self.describe(channel, interact %(user))
+			f.close()
+			return
 	# irc callbacks
 	 
 	def irc_NICK(self, prefix, params):
