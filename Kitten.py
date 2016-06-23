@@ -15,7 +15,7 @@ import time, sys, unicodedata, os
 import urllib2
 
 #Module imports
-sys.path.append(r'/home/kitlero/Kitten/modules')
+sys.path.append(r'./modules')
 import weather
 
 ##### Global Variables #####
@@ -113,7 +113,7 @@ class MessageLogger:
  
  
 class LogBot(irc.IRCClient):
-	nickname = 'Kitten' # nickname
+	nickname ='Sol' # nickname
 
 	def connectionMade(self):
 		irc.IRCClient.connectionMade(self)
@@ -279,16 +279,16 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'poop|kick|hit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|yiff|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		elif re.search(r'poop|kick|hit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			self.describe(channel, 'yowls and scratches %s' % (user))
 			return
 	 	
-	 	elif re.search(r'furaffinity|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
+	 	elif re.search(r'furaffinity|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass|yiff', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
 	 		f = open("catText/catYiffed.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
 			interact = data[random.randint(1, num_lines)].rstrip('\n')
-			self.describe(channel, interact %(user))
+			self.describe(channel, interact.format(user))
 			f.close()
 			return
 	# irc callbacks
@@ -338,7 +338,7 @@ if __name__ == '__main__':
 	#f = "wordshere.txt"
 	 
 	# connect factory to this host and port
-	hostname = 'localhost' # irc-server-hostname
+	hostname = 'irc.wetfish.net' # irc-server-hostname
 	port = 6697	#port
 	reactor.connectSSL(hostname, port, f, ssl.ClientContextFactory())
 	 
