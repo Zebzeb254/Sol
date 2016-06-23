@@ -253,7 +253,7 @@ class LogBot(irc.IRCClient):
                         f.close()
                         return
 
-		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|:3)\b', msg, re.I):
+		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|\:3)\b', msg, re.I):
 			f = open("catText/catYiffed.txt","r")
                         data = f.readlines()
                         num_lines = sum(1 for line in data) - 1
@@ -290,7 +290,7 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'poop|kick|\bhit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		elif re.search(r'nigga|poop|kick|\bhit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			self.describe(channel, 'yowls and scratches %s' % (user))
 			return
 
@@ -303,7 +303,7 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|:3)\b', msg, re.I):
+		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|\:3)\b', msg, re.I):
 			f = open("catText/catYiffed.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
