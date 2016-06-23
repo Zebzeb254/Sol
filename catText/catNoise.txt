@@ -1,3 +1,5 @@
+hiss
+yowl
 Meow
 Purr
 Mrow

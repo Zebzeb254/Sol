@@ -252,15 +252,26 @@ class LogBot(irc.IRCClient):
 			self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
 			f.close()
 			return
-	 
+
+
+                elif re.search(r'hi|hello|hey|sup|howdy|good ?morning|good ?night', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+                        f = open("catText/catNoise.txt","r")
+			data = f.readlines()
+                        num_lines = sum(1 for line in data) - 1
+                        msg = data[random.randint(1, num_lines)].rstrip('\n')
+                        self.msg(channel, msg)
+                        self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
+                        f.close()
+                        return
+
 	def alterCollidedNick(self, nickname):
 		return nickname+'2'
-	 
+
 	def action(self, user, channel, msg):
 		"""This will get called when the bot sees someone do an action."""
 		user = user.split('!', 1)[0]
 		self.logger.log("* %s %s" % (user, msg))
-		
+
 		if re.search(r'pet|pat|scratch|nuzzle|rub|stroke', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			f = open("catText/catInteract.txt","r")
 			data = f.readlines()
