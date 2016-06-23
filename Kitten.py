@@ -222,7 +222,7 @@ class LogBot(irc.IRCClient):
 
 	#### Regular speaking
 
-		elif msg.startswith(msg) and user != "Denice" and random.random() < 0.015:
+		elif msg.startswith(msg) and user != "Denice" and random.random() < 0.010:
 			f = open("catText/catNoise.txt", "r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
@@ -252,6 +252,17 @@ class LogBot(irc.IRCClient):
                         self.logger.log("%s <%s> %s" % (channel, self.nickname, msg))
                         f.close()
                         return
+
+		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|:3)\b', msg, re.I):
+			f = open("catText/catYiffed.txt","r")
+                        data = f.readlines()
+                        num_lines = sum(1 for line in data) - 1
+                        interact = data[random.randint(1, num_lines)].rstrip('\n')
+                        self.describe(channel, interact.format(user))
+                        f.close()
+                        return
+
+
 
 	def alterCollidedNick(self, nickname):
 		return nickname+'2'
@@ -283,23 +294,33 @@ class LogBot(irc.IRCClient):
 			self.describe(channel, 'yowls and scratches %s' % (user))
 			return
 
-	 	elif re.search(r'xie|hir|pomf|furaffinity|furry|mounts|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass|yiff', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
-	 		f = open("catText/catYiffed.txt","r")
+		elif re.search(r'sie|xie|hir|pomf|furaffinity|furry|mounts|pelvis|climax|breast|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass|yiff', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
+			f = open("catText/catYiffed.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
 			interact = data[random.randint(1, num_lines)].rstrip('\n')
 			self.describe(channel, interact.format(user))
 			f.close()
 			return
+
+		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|:3)\b', msg, re.I):
+			f = open("catText/catYiffed.txt","r")
+			data = f.readlines()
+			num_lines = sum(1 for line in data) - 1
+			interact = data[random.randint(1, num_lines)].rstrip('\n')
+			self.describe(channel, interact.format(user))
+			f.close()
+			return
+
+
 	# irc callbacks
-	 
+
 	def irc_NICK(self, prefix, params):
 		"""Called when an IRC user changes their nickname."""
 		old_nick = prefix.split('!')[0]
 		new_nick = params[0]
 		self.logger.log("%s is now known as %s" % (old_nick, new_nick))
-	 
-	 
+
 	# For fun, override the method that determines how a nickname is changed on
 	# collisions. The default method appends an underscore.
 	def alterCollidedNick(self, nickname):
@@ -315,20 +336,20 @@ class LogBotFactory(protocol.ClientFactory):
 	A new protocol instance will be created each time we connect to the server.
 	"""
 	protocol = LogBot
-	 
+
 	def __init__(self, filename):
 		self.channel = 'TestingTests' #channel
 		self.filename = filename
-	 
+
 	def clientConnectionLost(self, connector, reason):
 		"""If we get disconnected, reconnect to server."""
 		connector.connect()
-	 
+
 	def clientConnectionFailed(self, connector, reason):
 		print "connection failed:", reason
 		reactor.stop()
- 
- 
+
+
 if __name__ == '__main__':
 	# initialize logging
 	log.startLogging(sys.stdout)
