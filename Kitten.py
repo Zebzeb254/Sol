@@ -132,7 +132,7 @@ class LogBot(irc.IRCClient):
 	 
 	def signedOn(self):
 		"""Called when bot has succesfully signed on to server."""
-		self.join(self.factory.channel)
+		self.join("#wetfish")
 	 
 	def joined(self, channel):
 		"""This will get called when the bot joins the channel."""
@@ -184,17 +184,6 @@ class LogBot(irc.IRCClient):
 
 	##### Function Calls #####
 
-		elif msg.startswith(command + "weather"):
-			numbers = re.search('&weather (.+)', msg)
-			if numbers:
-				areaCode = numbers.group(1)
-				areaCode = areaCode.replace(' ', '+')
-				Weather(areaCode)
-			msg = "%s" % (sections)
-			self.msg(channel, msg)
-			self.logger.log("%s <%s> %s" % (channel, user, msg))
-			return
-
 		elif msg.startswith(command + "movie"):
 			movieTitle = re.search('&movie (.+)', msg)
 			if movieTitle:
@@ -214,7 +203,7 @@ class LogBot(irc.IRCClient):
 			self.msg(channel, msg)
 			self.logger.log("%s <%s> %s" % (channel, user, msg))
 			return
-		
+
 		elif msg.startswith(command + "8ball"):
 			f = open("catText/eightBall.txt","r")
 			data = f.readlines()
@@ -254,7 +243,7 @@ class LogBot(irc.IRCClient):
 			return
 
 
-                elif re.search(r'hi|hello|hey|sup|howdy|good ?morning|good ?night', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+                elif re.search(r'\b(hi|hello|hey|sup|howdy|good ?morning|good ?night)\b', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
                         f = open("catText/catNoise.txt","r")
 			data = f.readlines()
                         num_lines = sum(1 for line in data) - 1
@@ -272,7 +261,7 @@ class LogBot(irc.IRCClient):
 		user = user.split('!', 1)[0]
 		self.logger.log("* %s %s" % (user, msg))
 
-		if re.search(r'pet|pat|scratch|nuzzle|rub|stroke', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		if re.search(r'pet|pat|scratch|nuzzle|rub|stroke|cuddle', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			f = open("catText/catInteract.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
@@ -281,7 +270,7 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'feeds|food|fed|chicken', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		elif re.search(r'feeds|food|fed|chicken|fish', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			f = open("catText/catEat.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
@@ -290,11 +279,11 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'poop|kick|hit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		elif re.search(r'poop|kick|\bhit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			self.describe(channel, 'yowls and scratches %s' % (user))
 			return
-	 	
-	 	elif re.search(r'furaffinity|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass|yiff', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
+
+	 	elif re.search(r'xie|hir|pomf|furaffinity|furry|mounts|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass|yiff', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
 	 		f = open("catText/catYiffed.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
