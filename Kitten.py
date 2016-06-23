@@ -20,7 +20,7 @@ import weather
 
 ##### Global Variables #####
 
-command = '&'
+command = '*'
 movieInfo = []
 bitcoinInfo = []
 coinInfo = []
@@ -253,7 +253,7 @@ class LogBot(irc.IRCClient):
                         f.close()
                         return
 
-		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|\:3)\b', msg, re.I):
+		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|spew|vulpine|fart|tentacle)\b|:3', msg, re.I):
 			f = open("catText/catYiffed.txt","r")
                         data = f.readlines()
                         num_lines = sum(1 for line in data) - 1
@@ -272,7 +272,11 @@ class LogBot(irc.IRCClient):
 		user = user.split('!', 1)[0]
 		self.logger.log("* %s %s" % (user, msg))
 
-		if re.search(r'pet|pat|scratch|nuzzle|rub|stroke|cuddle', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		if re.search(r'nigga|poop|kick|\bhit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+                        self.describe(channel, 'yowls and scratches %s' % (user))
+			return
+
+		elif re.search(r'pet|pat|scratch|nuzzle|rub|stroke|cuddle', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
 			f = open("catText/catInteract.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
@@ -290,20 +294,7 @@ class LogBot(irc.IRCClient):
 			f.close()
 			return
 
-		elif re.search(r'nigga|poop|kick|\bhit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
-			self.describe(channel, 'yowls and scratches %s' % (user))
-			return
-
 		elif re.search(r'sie|xie|hir|pomf|furaffinity|furry|mounts|pelvis|climax|breast|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|knot|vulpine|fart|tentacle|cock|butt|ass|yiff', msg, re.I) and  re.search(r'%s' % self.nickname, msg, re.I):
-			f = open("catText/catYiffed.txt","r")
-			data = f.readlines()
-			num_lines = sum(1 for line in data) - 1
-			interact = data[random.randint(1, num_lines)].rstrip('\n')
-			self.describe(channel, interact.format(user))
-			f.close()
-			return
-
-		elif re.search(r'\b(pomf|furaffinity|furry|pelvis|climax|kawaii|silicone|circumsision|sheathe|arse|cum|spew|penis|vulpine|fart|tentacle|cock|butt|\:3)\b', msg, re.I):
 			f = open("catText/catYiffed.txt","r")
 			data = f.readlines()
 			num_lines = sum(1 for line in data) - 1
