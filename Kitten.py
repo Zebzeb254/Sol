@@ -272,7 +272,7 @@ class LogBot(irc.IRCClient):
 		user = user.split('!', 1)[0]
 		self.logger.log("* %s %s" % (user, msg))
 
-		if re.search(r'nigga|poop|kick|\bhit|punch|stab|throw|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
+		if re.search(r'nigga|poop|kick|\bhit|punch|stab|kill|hurt|bite|spank|fuck|penetrate|finger', msg, re.I) and re.search(r'%s' % self.nickname, msg, re.I):
                         self.describe(channel, 'yowls and scratches %s' % (user))
 			return
 

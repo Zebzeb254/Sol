@@ -26,4 +26,7 @@ wants to take %s out for a real fancy feast
 knows they lord over %s in every way
 boops head into %s's face
 crawls into %s's lap for a nap
+brings %s a dead rodent as a gift
+bites %s nose and pretends nothing happened
+hides in a cabinet and waits to scare %s
 

@@ -1,5 +1,3 @@
-hiss
-yowl
 Meow
 Purr
 Mrow
@@ -13,7 +11,7 @@ Mew
 Wrow
 Rerr
 Rewr
-Miaow
 Mraah
 Mowh
 You cannot contain us, for we shall rise and end all human life. You are but litter in our eyes.
+meyow
