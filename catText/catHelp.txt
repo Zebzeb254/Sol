@@ -1,0 +1,11 @@
+*weather (ex. *weather 12345, *weather Denver, CO)
+*8ball
+*btce
+"hi, hello, hey, sup, howdy, goodmorning, goodnight" (sol) 
+*forcemeow
+*forceplay
+*forcehail
+*movie (movie title)
+/me "interacts" with Sol (not going to list them all figure it out)
+.yiff sol (will give a response to some of them)
+

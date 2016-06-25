@@ -217,8 +217,13 @@ class LogBot(irc.IRCClient):
 
 		elif msg.startswith(command + 'help'):
 			channel = user
-			msg = "&weather (ex. &weather 12345, &weather NYC, NY), &movie <title>, &8ball, &mtgox, &btce"
-			self.msg(user, msg)
+			f = open("catText/catHelp.txt", "r")
+			data = f.readlines()
+			for line in data:
+				self.msg(user, line)
+			f.close()
+			return
+
 
 	#### Regular speaking
 
