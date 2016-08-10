@@ -1,4 +1,3 @@
-*weather (ex. *weather 12345, *weather Denver, CO)
 *8ball
 *btce
 "hi, hello, hey, sup, howdy, goodmorning, goodnight" (sol) 
